@@ -37,7 +37,8 @@
             font-size: 80px;
             font-family: sans-serif;
         }
-        .clock {
+        .display p {
+            margin:80px;
             font-size: 35px;
         }
     </style>
@@ -52,7 +53,6 @@
                 return this;
             }
         });
-
 
         $(document).ready(() => {
             let questions = $('.questions').text().trim().split('\n').map(s => s.trim()) ;
@@ -74,7 +74,7 @@
                 if(index >= questions.length) {
                     $('.display').text("");
                 } else {
-                    $('.display').html(questions[index++] + "<p class='clock'>3:00</p>");
+                    $('.display').html('<p>&nbsp;</p>' + questions[index++] + "<p class='clock'>3:00</p>");
                     time = 180;
                 }
             }
