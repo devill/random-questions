@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Random questions</title></head>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background: url("1488726.jpg");
+            background-position: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .questions {
+            display:none;
+        }
+
+        .container {
+            position: relative;
+            background: rgba(0,0,0,0.7);
+            margin:0;
+        }
+
+        .display {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            width: 80%;
+            padding-left: 10%;
+            padding-right: 10%;
+            text-align: center;
+            color:white;
+            font-size: 80px;
+            font-family: sans-serif;
+        }
+        .clock {
+            font-size: 35px;
+        }
+    </style>
+
+    <script language="JavaScript1.5">
+        Object.defineProperty(Array.prototype, 'shuffle', {
+            value: function() {
+                for (let i = this.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [this[i], this[j]] = [this[j], this[i]];
+                }
+                return this;
+            }
+        });
+
+
+        $(document).ready(() => {
+            let questions = $('.questions').text().trim().split('\n').map(s => s.trim()) ;
+            $('.container').height($(window).innerHeight());
+            $(window).resize(() => $('.container').height($('body').innerHeight()));
+            var index = 0;
+            var time = 0;
+
+            setInterval(() => {
+                if(time > 0) time--;
+                var minutes = Math.floor(time/60);
+                var seconds = time % 60;
+                if(seconds < 10) seconds = "0"+seconds;
+                $('.clock').text(minutes + ":" + seconds)
+            }, 1000)
+
+            function next() {
+                console.log(index, questions[index]);
+                if(index >= questions.length) {
+                    $('.display').text("");
+                } else {
+                    $('.display').html(questions[index++] + "<p class='clock'>3:00</p>");
+                    time = 180;
+                }
+            }
+
+            $(document).click(next);
+            $(document).keypress(next);
+        });
+    </script>
+<body>
+
+    <div class="questions">
+        Transzvesztita vagy?
+        Mikor döntöttél úgy, hogy transz leszel?
+        Nem lehet, hogy egyszerűen csak meleg vagy?
+        Ezzel nem inkább pszichológushoz kellene fordulnod?
+        Mi van a lábad között?
+        Mit zavar az mi van a személyibe írva?
+        Minden transzon látszik, hogy transz, rajtad is!
+        Miért épp egy világjárvány alatt kell ezzel foglalkozni?
+        Attól, hogy babáztál/kisautóval játszottál nem leszel nő/férfi!
+        A nemváltás nem lehetséges, a kromoszómád nem fog megváltozni, és gyereked se lesz!
+        Aki férfinak született férfi, aki nőnek az nő… mi ezen a bonyolult?
+        Én meg helikopter vagyok!
+        Nem félsz, hogy tönkreteszed az egészséged a hormonokkal?
+        Sokan meggondolják magukat, mi lesz ha te is?
+        Nem félsz, hogy a pokolra jutsz?
+        De akkor most egy férfi csak úgy bemehet női wc-be?
+        Mint felnőtt transznemű mit gondolsz a nem váltó gyerekekről?
+        Indulhat-e transz nő, női sportversenyeken?
+    </div>
+    <div class="container">
+    <div class="display"></div>
+    </div>
+</body>
+</html>
